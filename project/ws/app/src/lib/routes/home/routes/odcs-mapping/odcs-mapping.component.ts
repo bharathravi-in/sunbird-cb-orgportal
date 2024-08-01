@@ -13,7 +13,7 @@ import { DesignationsService } from '../designation/services/designations.servic
 export class OdcsMappingComponent implements OnInit {
   environmentVal: any
   taxonomyConfig: any
-  showTopSection = true
+  showTopSection = false
   odcConfig: any
   configSvc: any
   showLoader = false
@@ -74,7 +74,7 @@ export class OdcsMappingComponent implements OnInit {
       } else {
         setTimeout(() => {
           this.getOrgReadData()
-        },         10000)
+        }, 10000)
       }
     })
   }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, OnInit, Output, Input, OnChanges, SimpleChanges } from '@angular/core'
 import { TrainingPlanDataSharingService } from './../../services/training-plan-data-share.service'
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog'
 // import { AddContentDialogComponent } from '../../components/add-content-dialog/add-content-dialog.component'
@@ -9,8 +9,9 @@ import { ConfirmationBoxComponent } from '../../components/confirmation-box/conf
   templateUrl: './create-content.component.html',
   styleUrls: ['./create-content.component.scss'],
 })
-export class CreateContentComponent implements OnInit {
+export class CreateContentComponent implements OnInit, OnChanges {
   @Output() addContentInvalid = new EventEmitter<any>()
+  @Input() tabSelected: string = ''
 
   categoryData: any[] = []
   contentData: any[] = []
@@ -25,7 +26,7 @@ export class CreateContentComponent implements OnInit {
   /* tslint:disable */
   confirmationText: string = 'You have unsaved progress on your CBP plan. Clicking "Yes" will discard it and take you to request new content screen. Would you like to continue?'
   /* tslint:enable */
-
+  isAparEnabled = false
   constructor(private tpdsSvc: TrainingPlanDataSharingService, public dialog: MatDialog,
     //  private snackbar: MatSnackBar,
     private router: Router
@@ -65,6 +66,19 @@ export class CreateContentComponent implements OnInit {
       },
     ]
     // this.handleApiData(true)
+    if (this.tpdsSvc.trainingPlanStepperData?.isApar) {
+      this.isAparEnabled = this.tpdsSvc.trainingPlanStepperData.isApar
+    } else {
+      this.tpdsSvc.trainingPlanStepperData.isApar = this.isAparEnabled
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['tabSelected'] && this.tabSelected === 'addContent') {
+      if (this.tpdsSvc.trainingPlanContentData?.data?.content) {
+        this.contentData = [...this.tpdsSvc.trainingPlanContentData.data.content]
+      }
+    }
   }
 
   handleApiData(event: any) {
@@ -158,4 +172,9 @@ export class CreateContentComponent implements OnInit {
     })
   }
 
+  onAparCheckboxChange(event: Event) {
+    const target = event.target as HTMLInputElement
+    this.isAparEnabled = target.checked
+    this.tpdsSvc.trainingPlanStepperData.isApar = this.isAparEnabled
+  }
 }

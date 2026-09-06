@@ -1,0 +1,156 @@
+$primary-color: #1B4CA1;
+
+.search-box {
+  display: flex;
+  flex: 0 0 auto;
+
+  .search-input {
+    width: 385px;
+    border-radius: 18px;
+    border: 1px solid #d5d0d0;
+    padding: 9px 9px 9px 45px;
+    margin: 0;
+    /* stylelint-disable */
+    font: 400 14px Lato;
+    /* stylelint-enable */
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 22px;
+    color: #666666;
+  }
+}
+
+.imageCell {
+  min-width: 260px;
+}
+
+.imageDiv {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 46px;
+}
+
+.cellImage {
+  width: 72px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #00000029;
+}
+
+.table-cell-text {
+  color: #000000DE;
+  /* stylelint-disable */
+  font: 400 14px Lato;
+  /* stylelint-enable */
+}
+
+.text-overflow-elipse {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: fit-content;
+  max-height: 36px;
+}
+
+.table-header-text {
+  color: #666666 !important;
+  /* stylelint-disable */
+  font: 400 12px Lato !important;
+  /* stylelint-enable */
+}
+
+.table-date-cell {
+  flex: 0 0 130px;
+}
+
+.table-status-cell {
+  flex: 0 0 110px;
+}
+
+.table-menu-cell {
+  flex: 0 0 100px;
+}
+
+.status-chip {
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 4px;
+  /* stylelint-disable */
+  font: 700 12px Lato;
+  /* stylelint-enable */
+}
+
+.status-live {
+  background-color: #1D892333;
+  color: #1D8923;
+}
+
+.status-draft {
+  background-color: #FEF0DC;
+  color: #B26A00;
+}
+
+.horizontalMenu {
+  color: #00000099;
+  cursor: pointer;
+}
+
+.item-btn {
+  color: #00000099 !important;
+  /* stylelint-disable */
+  font: 400 14px Lato;
+  /* stylelint-enable */
+  width: auto !important;
+  margin: 0;
+  padding: 0 !important;
+
+  .menu-item-icon {
+    color: #00000099;
+    margin-right: 5px;
+  }
+}
+
+.no-data {
+  padding: 24px 16px;
+  color: #666666;
+}
+
+.tableLoader {
+  height: calc(100vh - 400px);
+}
+
+:host ::ng-deep .assessments-table {
+  .mat-mdc-header-row {
+    background-color: #F5F5F5 !important;
+    min-height: 40px !important;
+  }
+
+  .mat-mdc-row {
+    min-height: 64px;
+  }
+}
+
+:host ::ng-deep .mat-paginator-container {
+  justify-content: center !important;
+}
+
+:host ::ng-deep mat-cell:first-of-type,
+:host ::ng-deep mat-header-cell:first-of-type {
+  padding-left: 16px !important;
+}
+
+:host ::ng-deep mat-cell:last-of-type,
+:host ::ng-deep mat-header-cell:last-of-type {
+  padding-right: 16px !important;
+}
+
+:host ::ng-deep .mat-mdc-menu-item-text {
+  margin-left: 10px !important;
+}

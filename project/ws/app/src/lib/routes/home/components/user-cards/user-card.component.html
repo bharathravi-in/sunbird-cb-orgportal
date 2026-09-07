@@ -61,12 +61,13 @@
         </div>
         <div class="float-right flex items-center" *ngIf="(isMdoAdmin || isMdoLeader) && !forMentor">
           <!-- <ng-container *ngIf="checkForMDOAdmin(user)"> -->
-          <div class="button mat-body" (click)="onEditUser(user, panel);;"
+          <div class="button mat-body" (click)="$event.stopPropagation(); onEditUser(user, panel);"
             *ngIf="currentFilter !== 'notmyuser' && !user?.enableEdit">
             <mat-icon>edit</mat-icon> Edit
           </div>
           <!-- </ng-container> -->
-          <div class="button mat-body" (click)="confirmReassign(confirm, user);" *ngIf="currentFilter === 'notmyuser'">
+          <div class="button mat-body" (click)="$event.stopPropagation(); confirmReassign(confirm, user);"
+            *ngIf="currentFilter === 'notmyuser'">
             Reassign</div>
         </div>
         <div class="float-right flex flex-col items-center" *ngIf="(isMdoAdmin || isMdoLeader) && forMentor">
@@ -421,13 +422,13 @@
                     Only space and alphabets are supported
                   </mat-error>
                 </p>
-                <mat-chip-list #chipListTags>
-                  <mat-chip *ngFor="let tag of selectedtags" [selectable]="true" [removable]="true"
+                <mat-chip-grid #chipListTags>
+                  <mat-chip-row *ngFor="let tag of selectedtags" [removable]="true"
                     (removed)="removeActivity(tag)">
                     {{ tag }}
                     <mat-icon matChipRemove>cancel</mat-icon>
-                  </mat-chip>
-                </mat-chip-list>
+                  </mat-chip-row>
+                </mat-chip-grid>
                 <!-- </mat-form-field> -->
               </div>
             </div>

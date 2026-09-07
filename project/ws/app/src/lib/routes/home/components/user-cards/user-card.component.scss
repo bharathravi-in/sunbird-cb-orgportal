@@ -246,9 +246,18 @@ label {
   height: 36px;
 }
 
-.mat-chip-list {
-  margin-top: 2px;
-  display: flex;
+::ng-deep .mat-mdc-chip-grid {
+  margin-top: 2px !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+::ng-deep .mat-mdc-chip-grid .mdc-evolution-chip-set__chips {
+  width: 100% !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  margin-left: 0 !important;
 }
 
 .roles-list {

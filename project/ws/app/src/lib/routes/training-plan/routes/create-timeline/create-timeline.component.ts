@@ -44,7 +44,7 @@ export class CreateTimelineComponent implements OnInit {
    * once when the plan is opened and kept in step with what the user ticks.
    */
   getContentData() {
-    const contentIds = this.tpdsSvc.trainingPlanStepperData?.contentList || []
+    const contentIds = this.tpdsSvc.getContentIdentifiers()
     const selectedContent = _.keyBy(this.tpdsSvc.trainingPlanSelectedContent || [], 'identifier')
     const contentDataSelected = contentIds
       .map((identifier: string) => selectedContent[identifier])

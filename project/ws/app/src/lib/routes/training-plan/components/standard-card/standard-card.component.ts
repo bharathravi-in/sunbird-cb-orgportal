@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef, ViewChild, AfterViewChecked } from '@angular/core'
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { TrainingPlanDataSharingService } from '../../services/training-plan-data-share.service'
 import { SafeUrl } from '@angular/platform-browser'
@@ -9,7 +9,7 @@ import { SafeUrl } from '@angular/platform-browser'
     styleUrls: ['./standard-card.component.scss'],
     standalone: false
 })
-export class StandardCardComponent implements OnInit, AfterViewChecked {
+export class StandardCardComponent implements OnInit {
   @Input() cardSize: any
   @Input() checkboxVisibility: any = true
   @Input() contentData: any[] = []
@@ -38,10 +38,6 @@ export class StandardCardComponent implements OnInit, AfterViewChecked {
     })
   }
 
-  ngAfterViewChecked(): void {
-    this.changeDetectorRef.detectChanges()
-  }
-
   onChangePage(pe: PageEvent) {
     this.startIndex = (pe.pageIndex) * pe.pageSize
     this.lastIndex = pe.pageSize
@@ -59,14 +55,10 @@ export class StandardCardComponent implements OnInit, AfterViewChecked {
     if (!this.checkboxVisibility) {
       return !!item.selected
     }
-    const contentList = this.tpdsSvc.trainingPlanStepperData?.['contentList'] || []
-    return contentList.indexOf(item.identifier) > -1
+    return this.tpdsSvc.isContentSelected(item.identifier)
   }
 
   selectContentItem(event: any, item: any) {
-    if (!this.tpdsSvc.trainingPlanStepperData['contentList']) {
-      this.tpdsSvc.trainingPlanStepperData['contentList'] = []
-    }
     if (this.tpdsSvc.trainingPlanStepperData.status === 'Live') {
       this.tpdsSvc.isContentChanged = true
     }
@@ -94,19 +86,13 @@ export class StandardCardComponent implements OnInit, AfterViewChecked {
   }
 
   private addToContentList(item: any) {
-    const contentList = this.tpdsSvc.trainingPlanStepperData['contentList']
-    if (contentList.indexOf(item.identifier) === -1) {
-      contentList.push(item.identifier)
-    }
+    // Newly picked content does not gate the CA, it is marked on the gating courses list
+    this.tpdsSvc.addContentToPlan(item.identifier)
     this.tpdsSvc.addSelectedContent(item)
   }
 
   private removeFromContentList(item: any) {
-    const contentList = this.tpdsSvc.trainingPlanStepperData['contentList'] || []
-    const index = contentList.indexOf(item.identifier)
-    if (index > -1) {
-      contentList.splice(index, 1)
-    }
+    this.tpdsSvc.removeContentFromPlan(item.identifier)
     this.tpdsSvc.removeSelectedContent(item.identifier)
   }
 
@@ -124,6 +110,11 @@ export class StandardCardComponent implements OnInit, AfterViewChecked {
     })
   }
 
+  /**
+   * The paginator is reset by setting its properties by hand, which Angular does not see, so the
+   * view is refreshed here. This used to run on every view check, redrawing the whole card grid on
+   * each change detection pass and making a card click take seconds.
+   */
   resetPageIndex() {
     this.startIndex = 0
     this.lastIndex = 20
@@ -131,8 +122,8 @@ export class StandardCardComponent implements OnInit, AfterViewChecked {
     if (this.paginator) {
       this.paginator.pageIndex = 0
       this.paginator.pageSize = 20
+      this.changeDetectorRef.detectChanges()
     }
-
   }
 
 }

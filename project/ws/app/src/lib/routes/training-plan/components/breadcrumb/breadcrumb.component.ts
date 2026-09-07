@@ -248,7 +248,7 @@ export class BreadcrumbComponent implements OnInit {
         request: {
           orgIdList: [userRootOrgId],
           comment: trainingPlanStepperData?.comment ?? 'cbPlanId1 is created',
-          contentList: trainingPlanStepperData?.contentList || [],
+          contentList: this.tpdsSvc.buildContentListPayload(trainingPlanStepperData?.contentList),
           contentType: trainingPlanStepperData?.contentType || "Course",
           contextData: {
             accessControl: {
@@ -269,7 +269,7 @@ export class BreadcrumbComponent implements OnInit {
       return {
         request: {
           orgIdList: [userRootOrgId],
-          contentList: trainingPlanStepperData?.contentList || [],
+          contentList: this.tpdsSvc.buildContentListPayload(trainingPlanStepperData?.contentList),
           contentType: trainingPlanStepperData?.contentType || "Course",
           contextData: {
             accessControl: {
@@ -412,7 +412,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   checkIfValid() {
-    if (this.tpdsSvc.trainingPlanStepperData.contentList.length === 0 ||
+    if (this.tpdsSvc.getContentList().length === 0 ||
       !this.tpdsSvc.trainingPlanStepperData.accessControl ||
       !this.tpdsSvc.trainingPlanStepperData.endDate
     ) {

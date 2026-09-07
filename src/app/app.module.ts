@@ -124,6 +124,7 @@ import { PublicFaqModule } from './routes/public/public-faq/public-faq.module'
 import { TncComponent } from './routes/tnc/tnc.component'
 import { AppInterceptorService } from './services/app-interceptor.service'
 import { AppRetryInterceptorService } from './services/app-retry-interceptor.service'
+import { CaHierarchyInterceptorService } from './services/ca-hierarchy-interceptor.service'
 import { TncAppResolverService } from './services/tnc-app-resolver.service'
 import { TncPublicResolverService } from './services/tnc-public-resolver.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -341,6 +342,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AppRetryInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CaHierarchyInterceptorService, multi: true },
     TncAppResolverService,
     TncPublicResolverService,
     PipeContentRoutePipe,

@@ -104,11 +104,10 @@ export class CreateContentComponent implements OnInit, OnChanges {
    * one page stays ticked when the user comes back to it.
    */
   private markSelectedContent() {
-    const contentList = this.tpdsSvc.trainingPlanStepperData?.contentList || []
     const pageContent = this.tpdsSvc.trainingPlanContentData?.data?.content || []
     pageContent.forEach((sitem: any) => {
       if (sitem) {
-        sitem['selected'] = contentList.indexOf(sitem.identifier) > -1
+        sitem['selected'] = this.tpdsSvc.isContentSelected(sitem.identifier)
       }
     })
   }
@@ -116,11 +115,12 @@ export class CreateContentComponent implements OnInit, OnChanges {
   handleSelectedChips(event: any) {
     if (event) {
       this.markSelectedContent()
-      this.selectedContentChips = [...(this.tpdsSvc.trainingPlanContentData?.data?.content || [])]
+      // The chips name the content actually on the plan, whichever page it was picked from
+      this.selectedContentChips = this.tpdsSvc.getSelectedContentInPlanOrder()
     }
     this.selectedContentData = [...(this.tpdsSvc.trainingPlanSelectedContent || [])]
     // Counted from the plan content list, the selection is not limited to the page being shown
-    this.selectContentCount = (this.tpdsSvc.trainingPlanStepperData?.contentList || []).length
+    this.selectContentCount = this.tpdsSvc.getContentList().length
     if (this.selectContentCount <= 0) {
       this.addContentInvalid.emit(true)
     } else {

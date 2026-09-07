@@ -45,7 +45,14 @@ describe('BreadcrumbComponent', () => {
                 assignmentTypeInfo: [],
                 contentList: [],
                 endDate: null
-            }
+            },
+            getContentList: () => mockTpdsSvc.trainingPlanStepperData.contentList || [],
+            // The plan content list is sent as { identifier, mandatory } entries
+            buildContentListPayload: (contentList: any[]) => (contentList || []).map((item: any) => (
+                (typeof item === 'string')
+                    ? { identifier: item, mandatory: false }
+                    : { identifier: item.identifier, mandatory: !!item.mandatory }
+            ))
         }
 
         mockTpSvc = {
@@ -369,7 +376,7 @@ describe('BreadcrumbComponent', () => {
             expect(payload.request).toEqual({
                 orgIdList: ['org-1'],
                 comment: 'cbPlanId1 is created',
-                contentList: ['c1'],
+                contentList: [{ identifier: 'c1', mandatory: false }],
                 contentType: 'Course',
                 contextData: { accessControl: { userGroups: [], version: 1 } },
                 endDate: '2027-03-31',

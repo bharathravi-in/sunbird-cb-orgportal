@@ -771,6 +771,7 @@ export class UserCardComponent implements OnInit, OnChanges, AfterViewChecked, A
   setUserDetails(user: any) {
     if (user && user.profileDetails) {
       this.updateUserDataForm.reset()
+      this.updateTags(user.profileDetails)
 
       // Store the designation value to ensure it's preserved
       let userDesignation = ''

@@ -5,6 +5,48 @@
   </div>
 
   <div class="flex flex-column gap-2">
+    <span class="form-lable required">Linked APAR Plan</span>
+
+    <div class="linked-plan-row flex items-center gap-3 px-3 py-2">
+      <mat-icon class="plan-icon">assignment_turned_in</mat-icon>
+
+      <div class="flex flex-column gap-1 linked-plan-text">
+        <ng-container *ngIf="linkedPlan; else noLinkedPlan">
+          <span class="plan-name" [matTooltip]="linkedPlan.name" matTooltipClass="new-toolTip"
+            matTooltipPosition="above">{{linkedPlan.name}}</span>
+          <span class="plan-meta">
+            {{linkedPlan.planYear}}<ng-container *ngIf="planWindowDisplay"> &middot; due {{planWindowDisplay}}</ng-container>
+          </span>
+        </ng-container>
+        <ng-template #noLinkedPlan>
+          <span class="plan-placeholder">
+            No plan linked yet &mdash; the reporting year and access criteria have nowhere to come from
+          </span>
+        </ng-template>
+      </div>
+
+      <ng-container *ngIf="openMode !== 'view'">
+        <button type="button" mat-stroked-button class="choose-plan" (click)="openPlanPicker()">
+          {{ linkedPlan ? 'Change' : 'Choose' }}
+        </button>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="linkedPlan">
+      <span class="plan-derived" *ngIf="linkedPlan.orgName">
+        Access criteria inherited from: {{linkedPlan.orgName}}
+      </span>
+      <span class="plan-derived">
+        Unlocks after {{linkedPlan.gatingCourseCount}} gating course(s) completed
+      </span>
+    </ng-container>
+
+    <mat-error class="mat-caption mat-error-text" *ngIf="showValidationMsg('linkedPlan','required')">
+      Link an APAR plan, the reporting year and access criteria are read from it
+    </mat-error>
+  </div>
+
+  <div class="flex flex-column gap-2">
     <div class="basic-info-row flex items-center gap-3 px-3 py-2">
       <div class="app-icon-thumb flex justify-center items-center">
         <ng-container *ngIf="appIcon; else noAppIcon">

@@ -67,6 +67,8 @@ export class CreateAssessmentComponent implements OnInit {
 
   initializeForm() {
     this.assessmentDetailsForm = this.formBuilder.group({
+      // the plan is held as one object, changing it recomputes every derived value together
+      linkedPlan: new FormControl(null, [Validators.required]),
       assessmentName: new FormControl('', [
         Validators.required,
         Validators.minLength(comprehensiveAssessment.NAME_MIN_LENGTH),
@@ -128,6 +130,7 @@ export class CreateAssessmentComponent implements OnInit {
   patchAssessmentDetails() {
     this.contentId = _.get(this.contentDetails, 'identifier', '')
     this.assessmentDetailsForm.patchValue({
+      linkedPlan: this.assessmentSvc.readPlanMetadata(this.contentDetails),
       assessmentName: _.get(this.contentDetails, 'name', ''),
       description: _.get(this.contentDetails, 'description', ''),
       learningOutcome: _.get(this.contentDetails, 'purpose', ''),
@@ -262,6 +265,10 @@ export class CreateAssessmentComponent implements OnInit {
   private validateBasicDetails(): boolean {
     this.assessmentDetailsForm.markAllAsTouched()
     this.assessmentDetailsForm.updateValueAndValidity()
+    if (!_.get(this.assessmentDetailsForm, 'controls.linkedPlan.value')) {
+      this.openSnackBar('Link an APAR plan, the reporting year and access criteria are read from it')
+      return false
+    }
     if (this.assessmentDetailsForm.invalid) {
       this.openSnackBar('Please fill mandatory fields')
       return false
@@ -376,6 +383,7 @@ export class CreateAssessmentComponent implements OnInit {
       posterImage: formValues.appIcon,
       // the content schema types duration as a String, a number fails validation
       duration: String(this.duration || 0),
+      ...this.assessmentSvc.buildPlanMetadata(formValues.linkedPlan),
     }
   }
 

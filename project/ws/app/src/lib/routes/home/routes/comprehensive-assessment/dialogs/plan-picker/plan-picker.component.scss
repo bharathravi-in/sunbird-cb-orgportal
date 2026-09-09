@@ -1,0 +1,144 @@
+.plan-picker {
+  width: 100%;
+  background-color: #FFFFFF;
+
+  .picker-title {
+    /* stylelint-disable */
+    font: 600 18px Montserrat;
+    /* stylelint-enable */
+    color: #1B2133;
+  }
+
+  .picker-subtitle {
+    /* stylelint-disable */
+    font: 400 13px Lato;
+    /* stylelint-enable */
+    color: #666666;
+  }
+
+  .close-picker {
+    flex: 0 0 auto;
+    color: #666666;
+  }
+}
+
+.picker-filters {
+  .search-field {
+    flex: 1 1 auto;
+  }
+
+  .year-field {
+    flex: 0 0 200px;
+  }
+
+  .filter-icon {
+    color: #666666;
+    margin-right: 8px;
+  }
+}
+
+.picker-body {
+  // the list grows every cycle, the dialog scrolls instead of the page behind it
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.picker-state {
+  min-height: 160px;
+  /* stylelint-disable */
+  font: 400 13px Lato;
+  /* stylelint-enable */
+  color: #666666;
+}
+
+.plans-table {
+  border: 1px solid #0000001F;
+  border-radius: 8px;
+  overflow: hidden;
+
+  th.mat-header-cell {
+    /* stylelint-disable */
+    font: 700 13px Lato;
+    /* stylelint-enable */
+    color: #1B2133;
+    background-color: #F7F7F7;
+  }
+
+  td.mat-cell {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .select-cell {
+    width: 48px;
+  }
+
+  .plan-title-cell {
+    min-width: 0;
+  }
+
+  .cell-value {
+    /* stylelint-disable */
+    font: 600 13px Lato;
+    /* stylelint-enable */
+    color: #1B2133;
+  }
+
+  .cell-title {
+    /* stylelint-disable */
+    font: 700 14px Lato;
+    /* stylelint-enable */
+    color: #1B2133;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cell-note {
+    /* stylelint-disable */
+    font: 400 12px Lato;
+    /* stylelint-enable */
+    color: #666666;
+  }
+
+  tr.mat-row {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #F7F9FC;
+    }
+  }
+
+  tr.row-selected {
+    background-color: #EEF3FC;
+  }
+
+  // a plan that already carries a Live assessment stays listed, it is only not pickable
+  tr.row-disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.picker-actions {
+  border-top: 1px solid #0000001F;
+
+  .cancel-button {
+    color: #1B4CA1;
+    border-color: #1B4CA1;
+  }
+
+  .save-button {
+    color: #FFFFFF;
+    background-color: #1B4CA1;
+
+    &[disabled] {
+      color: #00000042;
+      background-color: #0000001F;
+    }
+  }
+}

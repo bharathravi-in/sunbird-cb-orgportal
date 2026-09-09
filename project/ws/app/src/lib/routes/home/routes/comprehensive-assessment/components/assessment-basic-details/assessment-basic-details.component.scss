@@ -10,6 +10,57 @@
   }
 }
 
+.linked-plan-row {
+  width: 100%;
+  max-width: 620px;
+  min-height: 64px;
+  border: 1px solid #0000001F;
+  border-left: 4px solid #1B4CA1;
+  border-radius: 12px;
+  background-color: #F7F9FC;
+
+  .plan-icon {
+    flex: 0 0 auto;
+    color: #1B4CA1;
+  }
+
+  .linked-plan-text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .plan-name {
+    /* stylelint-disable */
+    font: 700 14px Lato;
+    /* stylelint-enable */
+    color: #1B2133;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .plan-meta,
+  .plan-placeholder {
+    /* stylelint-disable */
+    font: 400 12px Lato;
+    /* stylelint-enable */
+    color: #666666;
+  }
+
+  .choose-plan {
+    flex: 0 0 auto;
+    color: #1B4CA1;
+    border-color: #1B4CA1;
+  }
+}
+
+.plan-derived {
+  /* stylelint-disable */
+  font: 400 12px Lato;
+  /* stylelint-enable */
+  color: #666666;
+}
+
 .basic-info-row {
   width: 460px;
   min-height: 72px;

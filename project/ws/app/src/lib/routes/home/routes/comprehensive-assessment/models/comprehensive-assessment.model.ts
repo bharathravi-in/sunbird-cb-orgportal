@@ -88,3 +88,46 @@ export namespace comprehensiveAssessmentList {
     'versionKey',
   ]
 }
+
+export namespace aparPlan {
+  /**
+   * Keys the linked plan is written to on the assessment collection. Everything the
+   * assessment derives (reporting year, window, owning MDO, access criteria, unlock rule)
+   * is read back off these, so a rename only has to happen here.
+   */
+  export const METADATA = {
+    planId: 'aparPlanId',
+    planName: 'aparPlanName',
+    reportingYear: 'aparYear',
+    windowEndDate: 'aparPlanEndDate',
+    owningOrg: 'aparPlanOrgName',
+    gatingCourseCount: 'aparGatingCourseCount',
+  }
+
+  export const PAGE_SIZE = 20
+  /** Value the reporting year filter carries while it is not narrowed to one year. */
+  export const ALL_YEARS = 'all'
+
+  /** A Live APAR plan, flattened off the cbplan search row for the picker table. */
+  export interface IPlanRow {
+    id: string
+    name: string
+    planYear: string
+    endDate: string
+    endDateDisplay: string
+    orgName: string
+    gatingCourseCount: number
+    /** A Live assessment already points at this plan, so it cannot be linked again. */
+    hasActiveAssessment: boolean
+  }
+
+  /** What is kept on the assessment once a plan is linked, the source of every derived value. */
+  export interface ILinkedPlan {
+    id: string
+    name: string
+    planYear: string
+    endDate: string
+    orgName: string
+    gatingCourseCount: number
+  }
+}

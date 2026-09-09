@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common'
 import { Component, Input } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
@@ -18,9 +19,10 @@ import {
   Paragraph,
   Underline,
 } from 'ckeditor5'
-import { comprehensiveAssessment } from '../../models/comprehensive-assessment.model'
+import { aparPlan, comprehensiveAssessment } from '../../models/comprehensive-assessment.model'
 import { richTextLength } from '../../models/rich-text.validator'
 import { BasicInfoComponent } from '../../dialogs/basic-info/basic-info.component'
+import { PlanPickerComponent } from '../../dialogs/plan-picker/plan-picker.component'
 
 @Component({
   selector: 'ws-app-assessment-basic-details',
@@ -44,7 +46,8 @@ export class AssessmentBasicDetailsComponent {
   ckEditorConfig: EditorConfig = {}
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private datePipe: DatePipe
   ) {
     this.ckEditorConfig = {
       toolbar: {
@@ -96,6 +99,42 @@ export class AssessmentBasicDetailsComponent {
         transformations: { include: [] },
       },
     }
+  }
+
+  /** The linked plan, the single source of every value this step does not ask for. */
+  get linkedPlan(): aparPlan.ILinkedPlan | null {
+    return _.get(this.assessmentDetails, 'controls.linkedPlan.value', null)
+  }
+
+  /** End of the assessment window, read off the plan timeline. */
+  get planWindowDisplay(): string {
+    const endDate = _.get(this.linkedPlan, 'endDate', '')
+    return endDate ? (this.datePipe.transform(endDate, 'dd MMM, yyyy') || '') : ''
+  }
+
+  /**
+   * Changing the plan recomputes every derived value together, so the plan is patched as one
+   * object and never field by field.
+   */
+  openPlanPicker() {
+    const dialogRef = this.dialog.open(PlanPickerComponent, {
+      panelClass: 'apar-plan-picker-dialog',
+      width: '840px',
+      maxWidth: '92vw',
+      autoFocus: false,
+      data: {
+        userProfile: this.userProfile,
+        selectedPlanId: _.get(this.linkedPlan, 'id', ''),
+      },
+    })
+
+    dialogRef.afterClosed().subscribe((plan: aparPlan.ILinkedPlan) => {
+      if (!plan) {
+        return
+      }
+      this.assessmentDetails.patchValue({ linkedPlan: plan })
+      this.assessmentDetails.updateValueAndValidity()
+    })
   }
 
   get appIcon(): string {

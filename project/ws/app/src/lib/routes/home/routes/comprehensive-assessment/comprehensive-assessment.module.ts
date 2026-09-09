@@ -12,6 +12,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatSelectModule } from '@angular/material/select'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatTooltipModule } from '@angular/material/tooltip'
@@ -27,6 +29,7 @@ import { AssessmentPreviewComponent } from './components/assessment-preview/asse
 import { AssessmentsListComponent } from './components/assessments-list/assessments-list.component'
 import { AssessmentsTableComponent } from './components/assessments-table/assessments-table.component'
 import { BasicInfoComponent } from './dialogs/basic-info/basic-info.component'
+import { PlanPickerComponent } from './dialogs/plan-picker/plan-picker.component'
 import { ComprehensiveAssessmentService } from './services/comprehensive-assessment.service'
 import { AssessmentResolverService } from './services/assessment-resolver'
 import { ComponentSharedModule } from '../../../workallocation-v2/components/component-shared.module'
@@ -41,6 +44,7 @@ import { ComponentSharedModule } from '../../../workallocation-v2/components/com
     AssessmentsListComponent,
     AssessmentsTableComponent,
     BasicInfoComponent,
+    PlanPickerComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +59,8 @@ import { ComponentSharedModule } from '../../../workallocation-v2/components/com
     MatMenuModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSelectModule,
     MatSortModule,
     MatTableModule,
     MatSnackBarModule,

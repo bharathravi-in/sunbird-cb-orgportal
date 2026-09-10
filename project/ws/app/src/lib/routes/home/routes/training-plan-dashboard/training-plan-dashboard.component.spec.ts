@@ -39,7 +39,10 @@ describe('TrainingPlanDashboardComponent', () => {
         loaderService = { changeLoaderState: jest.fn() }
         trainingPlanService = {}
         snackBar = { open: jest.fn() }
-        aparYearSvc = { getCurrentAparYear: jest.fn().mockReturnValue('2026-27') }
+        aparYearSvc = {
+            getCurrentAparYear: jest.fn().mockReturnValue('2026-27'),
+            isAparYearEditable: jest.fn().mockReturnValue(true),
+        }
         dialog = {}
 
         component = new TrainingPlanDashboardComponent(
@@ -150,6 +153,15 @@ describe('TrainingPlanDashboardComponent', () => {
                 ['app', 'training-plan', 'create-plan'],
                 { queryParams: { aparYear: '2025-26' } }
             )
+        })
+
+        it('should leave the year out of the route when the config closes it', () => {
+            aparYearSvc.isAparYearEditable.mockReturnValue(false)
+            component.selectedAparYear = '2024-25'
+
+            component.createCbp()
+
+            expect(router.navigate).toHaveBeenCalledWith(['app', 'training-plan', 'create-plan'])
         })
 
         it('should refuse to start a plan with no year selected', () => {

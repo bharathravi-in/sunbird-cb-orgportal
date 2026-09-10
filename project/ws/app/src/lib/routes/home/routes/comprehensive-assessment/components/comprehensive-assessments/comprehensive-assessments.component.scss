@@ -1,16 +1,11 @@
+@import '../../assessment-theme';
+
 .createAssessmentBtn {
-  height: 32px;
-  border-radius: 17px;
-  background-color: #1B4CA1 !important;
-  color: #FFFFFF !important;
-  /* stylelint-disable */
-  font: 700 14px Lato;
-  /* stylelint-enable */
-  padding: 0 16px;
+  @include ca-button-primary;
 }
 
 .filter {
-  border-bottom: 2px solid #ebebeb;
+  border-bottom: 2px solid $ca-border;
 
   .filter-option {
     border-radius: 0;
@@ -18,17 +13,14 @@
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;
-    color: #00000099;
-    /* stylelint-disable */
-    font: 400 14px Lato;
-    /* stylelint-enable */
+    color: $ca-text-muted;
+    font: $ca-font-body;
   }
 
+  /* The tab the user is on, in the flow's one accent. */
   .ws-mat-accent-border-active {
-    color: #1B4CA1 !important;
-    /* stylelint-disable */
-    font: 700 14px Lato;
-    /* stylelint-enable */
+    color: $ca-primary !important;
+    font: $ca-font-title;
   }
 
   .filter-option:first-child {

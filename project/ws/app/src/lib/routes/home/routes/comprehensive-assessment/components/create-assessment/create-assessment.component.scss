@@ -1,60 +1,42 @@
+@import '../../assessment-theme';
+
 .breadcrum {
   height: 65px;
-  border-bottom: 1px solid #00000014;
+  border-bottom: 1px solid $ca-border;
 
   .back-arrow {
-    color: #000000DE !important;
+    color: $ca-text !important;
     font-size: 24px;
     cursor: pointer;
   }
 
   .assessment-text {
-    /* stylelint-disable */
-    font: 400 14px Lato;
-    /* stylelint-enable */
+    font: $ca-font-body;
+    color: $ca-text-muted;
   }
 
   .chevron-arrow {
-    color: #1B4CA1;
+    color: $ca-text-muted;
   }
 
+  /* The step the user is on, so it keeps the accent. */
   .assessment-builder-text {
-    /* stylelint-disable */
-    font: 700 14px Lato;
-    /* stylelint-enable */
-    color: #1B4CA1;
+    font: $ca-font-title;
+    color: $ca-primary;
   }
 
   .save-and-exit {
+    @include ca-button-secondary;
+
     width: 140px;
-    height: 32px;
-    border-radius: 17px;
-    border: 1px solid #1B4CA1;
-    color: #1B4CA1 !important;
-    /* stylelint-disable */
-    font: 700 14px Lato;
-    /* stylelint-enable */
   }
 
   .next-btn {
-    height: 32px;
-    border-radius: 17px;
-    background-color: #1B4CA1 !important;
-    color: #FFFFFF !important;
-    /* stylelint-disable */
-    font: 700 14px Lato;
-    /* stylelint-enable */
+    @include ca-button-primary;
   }
 
   .publish-btn {
-    height: 32px;
-    border-radius: 17px;
-    background-color: #1B4CA1 !important;
-    color: #FFFFFF !important;
-    /* stylelint-disable */
-    font: 700 14px Lato;
-    /* stylelint-enable */
-    padding: 0px 10px;
+    @include ca-button-primary;
   }
 }
 
@@ -68,26 +50,28 @@
   .mat-step-icon {
     width: 25px;
     height: 25px;
-    border-radius: 12.5px;
-    color: #FFFFFF;
-    /* stylelint-disable */
-    font: 700 14px Lato;
-    /* stylelint-enable */
+    border-radius: 50%;
+    color: $ca-on-primary;
+    font: $ca-font-button;
   }
 
-  .mat-step-icon-selected {
-    background-color: #F3962F !important;
+  /* Where the user is, in the flow's one accent — this was the second colour
+     on the page, an orange that matched nothing else in the journey. */
+  .mat-step-icon-selected,
+  .mat-step-icon-state-done,
+  .mat-step-icon-state-edit {
+    background-color: $ca-primary !important;
   }
 
   .mat-step-label-selected {
-    /* stylelint-disable */
-    font: 700 14px Lato !important;
-    /* stylelint-enable */
-    color: #1B4CA1 !important;
+    font: $ca-font-title !important;
+    color: $ca-primary !important;
   }
 
-  .mat-step-icon:not(.mat-step-icon-selected):not(.mat-step-icon-completed) {
-    background-color: #96ADD4 !important;
+  /* A step not reached yet is neutral, not a paler tint of the accent. */
+  .mat-step-icon:not(.mat-step-icon-selected):not(.mat-step-icon-state-done):not(.mat-step-icon-state-edit) {
+    background-color: $ca-neutral-strong !important;
+    color: $ca-on-primary !important;
   }
 
   .disable-step {

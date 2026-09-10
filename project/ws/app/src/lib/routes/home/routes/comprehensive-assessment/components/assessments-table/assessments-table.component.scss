@@ -1,4 +1,4 @@
-$primary-color: #1B4CA1;
+@import '../../assessment-theme';
 
 .search-box {
   display: flex;
@@ -6,13 +6,11 @@ $primary-color: #1B4CA1;
 
   .search-input {
     width: 385px;
-    border-radius: 18px;
-    border: 1px solid #d5d0d0;
+    border-radius: $ca-radius-pill;
+    border: 1px solid $ca-border;
     padding: 9px 9px 9px 45px;
     margin: 0;
-    /* stylelint-disable */
-    font: 400 14px Lato;
-    /* stylelint-enable */
+    font: $ca-font-body;
   }
 
   .search-icon {
@@ -20,7 +18,7 @@ $primary-color: #1B4CA1;
     top: 8px;
     left: 16px;
     font-size: 22px;
-    color: #666666;
+    color: $ca-text-muted;
   }
 }
 
@@ -38,15 +36,13 @@ $primary-color: #1B4CA1;
   width: 72px;
   height: 46px;
   object-fit: cover;
-  border-radius: 5px;
-  border: 1px solid #00000029;
+  border-radius: $ca-radius-control;
+  border: 1px solid $ca-border;
 }
 
 .table-cell-text {
-  color: #000000DE;
-  /* stylelint-disable */
-  font: 400 14px Lato;
-  /* stylelint-enable */
+  color: $ca-text;
+  font: $ca-font-body;
 }
 
 .text-overflow-elipse {
@@ -60,10 +56,8 @@ $primary-color: #1B4CA1;
 }
 
 .table-header-text {
-  color: #666666 !important;
-  /* stylelint-disable */
-  font: 400 12px Lato !important;
-  /* stylelint-enable */
+  color: $ca-text-muted !important;
+  font: $ca-font-meta !important;
 }
 
 .table-date-cell {
@@ -78,48 +72,48 @@ $primary-color: #1B4CA1;
   flex: 0 0 100px;
 }
 
+/* Status is the one place colour carries meaning rather than decoration, so
+   these two keep theirs. */
 .status-chip {
   height: 26px;
   padding: 0 12px;
-  border-radius: 4px;
+  border-radius: $ca-radius-control;
   /* stylelint-disable */
   font: 700 12px Lato;
   /* stylelint-enable */
 }
 
 .status-live {
-  background-color: #1D892333;
-  color: #1D8923;
+  background-color: $ca-status-live-surface;
+  color: $ca-status-live-text;
 }
 
 .status-draft {
-  background-color: #FEF0DC;
-  color: #B26A00;
+  background-color: $ca-status-draft-surface;
+  color: $ca-status-draft-text;
 }
 
 .horizontalMenu {
-  color: #00000099;
+  color: $ca-text-muted;
   cursor: pointer;
 }
 
 .item-btn {
-  color: #00000099 !important;
-  /* stylelint-disable */
-  font: 400 14px Lato;
-  /* stylelint-enable */
+  color: $ca-text-muted !important;
+  font: $ca-font-body;
   width: auto !important;
   margin: 0;
   padding: 0 !important;
 
   .menu-item-icon {
-    color: #00000099;
+    color: $ca-text-muted;
     margin-right: 5px;
   }
 }
 
 .no-data {
   padding: 24px 16px;
-  color: #666666;
+  color: $ca-text-muted;
 }
 
 .tableLoader {
@@ -128,7 +122,7 @@ $primary-color: #1B4CA1;
 
 :host ::ng-deep .assessments-table {
   .mat-mdc-header-row {
-    background-color: #F5F5F5 !important;
+    background-color: $ca-surface !important;
     min-height: 40px !important;
   }
 

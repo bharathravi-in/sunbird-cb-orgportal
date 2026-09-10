@@ -1,6 +1,5 @@
 @import 'ws-vars';
-$secondary-color: #F3962F;
-$primary-color: #1B4CA1;
+@import '../../assessment-theme';
 
 ::ng-deep .create-comprehensive-assessment-dialog {
   .mat-form-field-appearance-outline .mat-form-field-infix {
@@ -9,7 +8,7 @@ $primary-color: #1B4CA1;
 
   .mat-form-field-appearance-outline .mat-form-field-outline-end {
     border-left-style: solid !important;
-    border-radius: 25px !important;
+    border-radius: $ca-radius-pill !important;
   }
 
   .mat-form-field-appearance-outline .mat-form-field-outline-start {
@@ -18,7 +17,7 @@ $primary-color: #1B4CA1;
 
   .mat-dialog-container {
     padding: 0 !important;
-    border-radius: 8px !important;
+    border-radius: $ca-radius-control !important;
   }
 
   &::-webkit-scrollbar {
@@ -30,13 +29,13 @@ $primary-color: #1B4CA1;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #E9ECEF;
-    border-radius: 8px;
+    background-color: $ca-surface-selected;
+    border-radius: $ca-radius-control;
     border: 3px solid transparent;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: #ccc;
+    background-color: $ca-neutral-strong;
   }
 }
 
@@ -54,24 +53,15 @@ $primary-color: #1B4CA1;
 }
 
 .cancel-button {
+  @include ca-button-secondary;
+
   width: 74px;
-  height: 32px !important;
-  /* stylelint-disable */
-  font: 700 14px Lato;
-  /* stylelint-enable */
-  border-radius: 17px;
 }
 
 .save-button {
+  @include ca-button-primary;
+
   min-width: 62px;
-  padding: 0 16px;
-  height: 32px !important;
-  background-color: $primary-color !important;
-  color: #FFFFFF !important;
-  /* stylelint-disable */
-  font: 700 14px Lato;
-  /* stylelint-enable */
-  border-radius: 17px;
 }
 
 .save-assessment {
@@ -89,24 +79,24 @@ $primary-color: #1B4CA1;
     padding: 0;
     width: 350px;
     margin: 47px 41px 48px 41px;
-    border-radius: 16px;
+    border-radius: $ca-radius-card;
 
     .upload {
-      background: linear-gradient(0deg, #EDF7FF 0%, #EDF7FF 100%), #FFF;
+      background-color: $ca-surface;
       min-height: 201px;
       height: 201px;
       overflow: hidden;
       position: relative;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
+      border-top-left-radius: $ca-radius-card;
+      border-top-right-radius: $ca-radius-card;
 
       span:first-child {
-        color: $primary-color;
+        color: $ca-primary;
       }
 
       span:last-child {
         line-height: 14.4px;
-        color: #666666;
+        color: $ca-text-muted;
       }
 
       // nested inside .upload so it outweighs the span:last-child colour above
@@ -142,7 +132,7 @@ $primary-color: #1B4CA1;
     }
 
     .assessment-icon {
-      color: $secondary-color;
+      color: $ca-text-muted;
       font-size: 18px;
       height: 18px;
       width: 18px;
@@ -150,10 +140,10 @@ $primary-color: #1B4CA1;
 
     .details-assessment {
       .content-type {
-        border: 1px solid $secondary-color;
+        border: 1px solid $ca-border;
         padding: 3.5px 8.5px 3.5px 7.5px;
-        background-color: #FEFAF4;
-        border-radius: 15px;
+        background-color: $ca-surface;
+        border-radius: $ca-radius-pill;
       }
     }
   }
@@ -181,30 +171,29 @@ $primary-color: #1B4CA1;
 }
 
 .text-blue {
-  color: $primary-color;
+  color: $ca-primary;
 }
 
 .dashed-border {
-  border: 2px dashed $primary-color;
+  border: 2px dashed $ca-border;
 }
 
 .favicon {
   width: 38px;
   height: 38px;
-  border-radius: 5px;
-  border: 1px solid #00000029;
+  border-radius: $ca-radius-control;
+  border: 1px solid $ca-border;
 }
 
 .karmayogi-text {
-  color: #1B2133;
-  /* stylelint-disable */
-  font: 400 14px Lato;
-  /* stylelint-enable */
+  color: $ca-text;
+  font: $ca-font-body;
 }
 
+/* An aside, so it reads as an inset of the dialog rather than a highlighter pen. */
 .note-container {
   margin-top: 16px;
   padding: 9px;
-  background: #f9ff003d;
-  border-radius: 10px;
+  background-color: $ca-surface;
+  border-radius: $ca-radius-control;
 }

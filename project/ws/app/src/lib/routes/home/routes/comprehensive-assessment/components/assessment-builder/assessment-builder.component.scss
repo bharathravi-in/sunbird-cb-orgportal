@@ -1,11 +1,10 @@
+@import '../../assessment-theme';
+
 .assessment-builder {
-  border: 1px solid #1B4CA1;
-  border-radius: 12px;
+  @include ca-panel;
 
   .assessment-header {
-    color: #1B4CA1;
-    /* stylelint-disable */
-    font: 600 14px Montserrat;
-    /* stylelint-enable */
+    color: $ca-text;
+    font: $ca-font-section;
   }
 }

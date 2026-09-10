@@ -1,0 +1,105 @@
+// ──────────────────────────────────────────────────────────────────────────
+// The look of the comprehensive assessment journey, in one place.
+//
+// Every screen and dialog of the flow imports this, so the list, the builder
+// steps and the two dialogs cannot drift apart again. Add a colour or a radius
+// here or not at all: a literal in a component sheet is how the flow ended up
+// with nine radii and a second accent colour.
+// ──────────────────────────────────────────────────────────────────────────
+
+// ── Colour ───────────────────────────────────────────────────────────────
+// One accent, and it is the portal primary. It marks what the user can act on
+// (buttons, links) and where they are (active step, active tab) — never an
+// outline, a rail or a resting icon. Everything decorative is a neutral.
+// ───────────────────────────────────────────────────────────────────────
+$ca-primary: #1B4CA1;
+$ca-on-primary: #FFFFFF;
+
+$ca-text: #1B2133;        // headings, values, the things being read
+$ca-text-muted: #666666;  // captions, meta, placeholders, resting icons
+$ca-border: #0000001F;    // every outline in the flow, one weight of grey
+$ca-surface: #F7F7F7;     // inset rows, table headers
+$ca-surface-hover: #F7F7F7;
+$ca-surface-selected: #ECECEC;
+$ca-neutral-strong: #C4C4C4;  // a step not reached yet, a disabled plate
+$ca-error: #F44336;
+$ca-disabled-text: #00000042;
+$ca-disabled-surface: #0000001F;
+
+// Status carries meaning rather than decoration, so these two stay in colour.
+$ca-status-live-text: #1D8923;
+$ca-status-live-surface: #1D892333;
+$ca-status-draft-text: #B26A00;
+$ca-status-draft-surface: #FEF0DC;
+
+// ── Shape ────────────────────────────────────────────────────────────────
+// Three radii, nothing in between. `pill` is every button in the flow, on a
+// 32px height — the outlined one and the filled one alike, which is what the
+// two dialogs used to disagree about.
+// ───────────────────────────────────────────────────────────────────────
+$ca-radius-card: 12px;    // panels and the inset rows inside them
+$ca-radius-control: 8px;  // thumbnails, tables, editors
+$ca-control-height: 32px;
+
+// Fully round, whatever the control's height. The flow carried 17px, 18px, 23px
+// and 25px because each was a radius hand-matched to one control's height, and
+// they drifted the moment a height changed. This one cannot drift.
+$ca-radius-pill: 999px;
+
+// ── Type ───────────────────────────────────────────────────────────────
+/* stylelint-disable */
+$ca-font-section: 600 14px Montserrat;  // a panel's own heading
+$ca-font-title: 700 14px Lato;          // a row's primary line
+$ca-font-body: 400 14px Lato;
+$ca-font-meta: 400 12px Lato;           // the second line under a title
+$ca-font-button: 700 14px Lato;
+/* stylelint-enable */
+
+// ── Shared shapes ────────────────────────────────────────────────────────
+// The two button shapes of the flow. Every action in the journey is one of
+// these, so a new screen cannot invent a third.
+// ───────────────────────────────────────────────────────────────────────
+@mixin ca-button-base {
+  height: $ca-control-height;
+  border-radius: $ca-radius-pill;
+  font: $ca-font-button;
+  padding: 0 16px;
+}
+
+@mixin ca-button-primary {
+  @include ca-button-base;
+
+  border: 0;
+  background-color: $ca-primary;
+  color: $ca-on-primary;
+
+  &[disabled] {
+    background-color: $ca-disabled-surface;
+    color: $ca-disabled-text;
+  }
+}
+
+@mixin ca-button-secondary {
+  @include ca-button-base;
+
+  border: 1px solid $ca-primary;
+  background-color: transparent;
+  color: $ca-primary;
+}
+
+// A panel of the builder: the white card each step's fields sit on. The accent
+// outline frames the step the user is filling in, so it stays — the neutral
+// borders are for the rows and controls inside it, which should not compete
+// with the frame around them.
+@mixin ca-panel {
+  border: 1px solid $ca-primary;
+  border-radius: $ca-radius-card;
+}
+
+// An inset row inside a panel — the linked plan, the assessment name, the
+// duration. All three used to carry a different radius and background.
+@mixin ca-inset-row {
+  border: 1px solid $ca-border;
+  border-radius: $ca-radius-card;
+  background-color: $ca-surface;
+}

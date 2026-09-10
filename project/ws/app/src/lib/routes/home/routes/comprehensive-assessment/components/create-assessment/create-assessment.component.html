@@ -8,19 +8,19 @@
     </div>
     <div class="flex gap-4">
       <ng-container *ngIf="openMode === 'edit'">
-        <button mat-raised-button class="flex justify-center items-center save-and-exit" (click)="saveAndExit()">
+        <button mat-stroked-button class="flex justify-center items-center save-and-exit" (click)="saveAndExit()">
           Save Draft &amp; Exit</button>
       </ng-container>
       <ng-container *ngIf="currentStepperIndex > 0">
-        <button mat-raised-button class="flex justify-center items-center next-btn"
+        <button mat-flat-button class="flex justify-center items-center next-btn"
           (click)="moveToPreviousForm()">Previous</button>
       </ng-container>
       <ng-container *ngIf="selectedStepperLable !== 'Preview'">
-        <button mat-raised-button class="flex justify-center items-center next-btn"
+        <button mat-flat-button class="flex justify-center items-center next-btn"
           (click)="moveToNextForm()">Next</button>
       </ng-container>
       <ng-container *ngIf="selectedStepperLable === 'Assessment'">
-        <button mat-raised-button class="flex items-center publish-btn" (click)="preview()">Preview</button>
+        <button mat-flat-button class="flex items-center publish-btn" (click)="preview()">Preview</button>
       </ng-container>
     </div>
   </div>

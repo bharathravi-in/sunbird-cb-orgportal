@@ -1,3 +1,5 @@
+@import '../../assessment-theme';
+
 .plan-picker {
   width: 100%;
   background-color: #FFFFFF;
@@ -6,19 +8,17 @@
     /* stylelint-disable */
     font: 600 18px Montserrat;
     /* stylelint-enable */
-    color: #1B2133;
+    color: $ca-text;
   }
 
   .picker-subtitle {
-    /* stylelint-disable */
-    font: 400 13px Lato;
-    /* stylelint-enable */
-    color: #666666;
+    font: $ca-font-meta;
+    color: $ca-text-muted;
   }
 
   .close-picker {
     flex: 0 0 auto;
-    color: #666666;
+    color: $ca-text-muted;
   }
 }
 
@@ -32,7 +32,7 @@
   }
 
   .filter-icon {
-    color: #666666;
+    color: $ca-text-muted;
     margin-right: 8px;
   }
 }
@@ -45,23 +45,21 @@
 
 .picker-state {
   min-height: 160px;
-  /* stylelint-disable */
-  font: 400 13px Lato;
-  /* stylelint-enable */
-  color: #666666;
+  font: $ca-font-meta;
+  color: $ca-text-muted;
 }
 
 .plans-table {
-  border: 1px solid #0000001F;
-  border-radius: 8px;
+  border: 1px solid $ca-border;
+  border-radius: $ca-radius-control;
   overflow: hidden;
 
   th.mat-header-cell {
     /* stylelint-disable */
     font: 700 13px Lato;
     /* stylelint-enable */
-    color: #1B2133;
-    background-color: #F7F7F7;
+    color: $ca-text;
+    background-color: $ca-surface;
   }
 
   td.mat-cell {
@@ -81,36 +79,34 @@
     /* stylelint-disable */
     font: 600 13px Lato;
     /* stylelint-enable */
-    color: #1B2133;
+    color: $ca-text;
   }
 
   .cell-title {
-    /* stylelint-disable */
-    font: 700 14px Lato;
-    /* stylelint-enable */
-    color: #1B2133;
+    font: $ca-font-title;
+    color: $ca-text;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .cell-note {
-    /* stylelint-disable */
-    font: 400 12px Lato;
-    /* stylelint-enable */
-    color: #666666;
+    font: $ca-font-meta;
+    color: $ca-text-muted;
   }
 
   tr.mat-row {
     cursor: pointer;
 
     &:hover {
-      background-color: #F7F9FC;
+      background-color: $ca-surface-hover;
     }
   }
 
+  /* The radio already says which row is picked, so the row only has to sit
+     apart from its neighbours — a neutral step, not a second accent. */
   tr.row-selected {
-    background-color: #EEF3FC;
+    background-color: $ca-surface-selected;
   }
 
   // a plan that already carries a Live assessment stays listed, it is only not pickable
@@ -125,20 +121,16 @@
 }
 
 .picker-actions {
-  border-top: 1px solid #0000001F;
+  border-top: 1px solid $ca-border;
 
+  /* Both buttons take the flow's one button shape. These two were the pair
+     that disagreed: the outlined one fell back to the Material radius while
+     every other button in the journey was a pill. */
   .cancel-button {
-    color: #1B4CA1;
-    border-color: #1B4CA1;
+    @include ca-button-secondary;
   }
 
   .save-button {
-    color: #FFFFFF;
-    background-color: #1B4CA1;
-
-    &[disabled] {
-      color: #00000042;
-      background-color: #0000001F;
-    }
+    @include ca-button-primary;
   }
 }

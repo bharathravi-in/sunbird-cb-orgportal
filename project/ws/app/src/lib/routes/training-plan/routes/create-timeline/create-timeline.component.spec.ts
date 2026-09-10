@@ -12,17 +12,8 @@ describe('CreateTimelineComponent', () => {
             trainingPlanStepperData: {
                 status: 'live',
                 assignmentType: 'Designation',
-                contentList: [
-                    { identifier: 'do_1', mandatory: false },
-                    { identifier: 'do_2', mandatory: true },
-                    { identifier: 'do_3', mandatory: false },
-                    { identifier: 'do_4', mandatory: false },
-                    { identifier: 'do_5', mandatory: false },
-                ],
+                contentList: ['do_1', 'do_2', 'do_3', 'do_4', 'do_5'],
             },
-            getContentIdentifiers: () =>
-                (tpdsSvcMock.trainingPlanStepperData.contentList || [])
-                    .map((item: any) => (typeof item === 'string' ? item : item.identifier)),
             // The whole selection of the plan, whichever page each content was picked from
             trainingPlanSelectedContent: [
                 { identifier: 'do_1', selected: true },

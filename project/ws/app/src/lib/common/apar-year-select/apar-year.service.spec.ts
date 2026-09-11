@@ -28,7 +28,10 @@ describe('AparYearService', () => {
     it('should list the years configured in the global config', () => {
       const years = service.getAparYears()
 
-      expect(years).toEqual(globalConfig.cbpPlanYear.yearList)
+      expect(years).toEqual([
+        { label: '2026-27 (Current A.Y.)', value: '2026-27', editable: true, current: true },
+        { label: '2025-26', value: '2025-26', editable: false, current: false },
+      ])
     })
 
     it('should ignore the year count when the global config drives the list', () => {
@@ -44,7 +47,8 @@ describe('AparYearService', () => {
         cbpPlanYear: { yearList: [{ value: '2024-25' }, { label: 'no value' }, null] },
       }
 
-      expect(service.getAparYears()).toEqual([{ label: '2024-25', value: '2024-25', editable: true }])
+      expect(service.getAparYears())
+        .toEqual([{ label: '2024-25 (Current A.Y.)', value: '2024-25', editable: true, current: true }])
     })
 
     it('should close only the years the config marks as closed', () => {

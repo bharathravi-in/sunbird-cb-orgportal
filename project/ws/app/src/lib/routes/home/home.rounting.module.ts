@@ -360,6 +360,11 @@ const routes: Routes = [
         loadChildren: () => import('./routes/events-2/events-2.module').then(m => m.Events2Module),
       },
       {
+        path: 'comprehensive-assessment',
+        loadChildren: () => import('./routes/comprehensive-assessment/comprehensive-assessment.module')
+          .then(m => m.ComprehensiveAssessmentModule),
+      },
+      {
         path: 'community',
         loadChildren: () => import('./routes/community/community.module').then(m => m.CommunityModule),
         resolve: {

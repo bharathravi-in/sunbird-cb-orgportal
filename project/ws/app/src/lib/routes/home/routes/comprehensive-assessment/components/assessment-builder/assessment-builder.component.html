@@ -1,0 +1,7 @@
+<div class="assessment-builder p-6">
+  <div class="assessment-header mb-4">
+    Assessment
+  </div>
+  <sb-uic-assessment-main [config]="config" (assessmentSaved)="onAssessmentSaved($event)"
+    (loader)="onLoader($event)"></sb-uic-assessment-main>
+</div>

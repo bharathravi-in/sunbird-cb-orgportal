@@ -1,0 +1,102 @@
+<div class="flex flex-between create-cont height-480">
+  <div class="assessment-input-wrapper flex-grow pl-6 pr-4 py-5 relative">
+    <form [formGroup]="assessmentForm" (ngSubmit)="onSave()" class="h-full">
+      <div>
+        <p class="font-montserrat text-center text-xl font-semibold">
+          {{ isEditMode ? 'Edit Basic Information' : 'Basic Information' }}
+        </p>
+        <div class="form-controls mat-full-radius">
+          <div class="label">
+            <span class="mr-1 font-semibold">Assessment Name
+              <strong class="text-red-700">*</strong>
+            </span>
+          </div>
+          <mat-form-field appearance="outline" class="w-full">
+            <input matInput placeholder="Add your assessment name" formControlName="assessmentName"
+              [maxlength]="nameMaxLength">
+            <mat-hint>Only ( a-z/A-Z , 0-9 . - _ $ / : [ ]' ' " " !) characters are supported</mat-hint>
+            <mat-hint align="end" class="text-sm">{{assessmentNameLength}}/{{nameMaxLength}}</mat-hint>
+            <mat-error *ngIf="assessmentName?.hasError('required')">
+              Assessment name is mandatory
+            </mat-error>
+            <mat-error *ngIf="assessmentName?.hasError('pattern')">
+              Only ( a-z/A-Z , 0-9 . _ - $ / : [ ]' ' " " !) characters are supported
+            </mat-error>
+            <mat-error
+              *ngIf="!assessmentName?.hasError('required') && !assessmentName?.hasError('pattern') && assessmentName?.hasError('minlength')">
+              Minimum characters left to create {{ nameMinLength - assessmentNameLength }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="note-container" *ngIf="!isEditMode">
+          <b>Note:</b>
+          <ul class="margin-remove">
+            <li>Add the description, learning outcome and questions in the next steps.</li>
+            <li>The assessment duration is calculated from the assessment you build.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-btns save-assessment flex justify-center gap-4">
+        <button mat-stroked-button class="flex justify-center items-center mat-btn-outline cancel-button"
+          (click)="dialogRef.close();" type="button">
+          <span class="font-bold text-sm">Cancel</span>
+        </button>
+        <button mat-flat-button class="flex justify-center items-center save-button" type="submit"
+          [disabled]="(assessmentForm.invalid || !imgURL)">
+          <span class="font-bold text-sm">{{ isEditMode ? 'Update' : 'Create' }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="upload-wrapper">
+    <div class="upload-assessment-details flex justify-center items-center">
+      <mat-card class="upload-card" appearance="outlined">
+        <div class="upload flex justify-center items-center cursor-pointer"
+          [ngClass]="imgURL ? 'dashed-border-none' : 'dashed-border'"
+          onclick="document.getElementById('upload-assessment-file').click();">
+          <input #file type="file" name="upload-assessment-file" id="upload-assessment-file" class="hidden"
+            accept=".png, .jpg, .jpeg" (change)="onFileSelected(file.files);">
+          <ng-container *ngIf="!imgURL">
+            <div class="flex flex-column items-center gap-2">
+              <img src="/assets/icons/upload-upward-arrow.svg" alt="icon">
+              <span class="text-sm font-bold text-blue">Upload Image <strong class="text-red-700">*</strong></span>
+              <span class="text-xs font-normal">Supported file types: PNG, JPG, JPEG</span>
+              <span class="text-xs font-normal">Max Size - 500KB</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="imgURL">
+            <img class="preview-img" [src]="imgURL" alt="assessment thumbnail" />
+            <div class="change-image-overlay flex justify-center items-center gap-1">
+              <mat-icon class="change-icon">photo_camera</mat-icon>
+              <span class="text-xs font-bold">Change image</span>
+            </div>
+          </ng-container>
+        </div>
+        <mat-card-content>
+          <div class="details-assessment px-4 py-4">
+            <div class="inline-flex items-center mb-4 content-type">
+              <mat-icon class="assessment-icon mr-2">assignment</mat-icon>
+              <span class="text-sm">Comprehensive Assessment</span>
+            </div>
+            <div class="input-assessment mb-4">
+              <ng-container *ngIf="assessmentName?.value">
+                <label class="custome-title" #tooltip="matTooltip" [matTooltip]="assessmentName?.value"
+                  matTooltipClass="new-toolTip" matTooltipPosition="above">{{assessmentName?.value}}</label>
+              </ng-container>
+              <ng-container *ngIf="!assessmentName?.value">
+                <label class="custome-title">Assessment Name</label>
+              </ng-container>
+            </div>
+            <div class="flex flex-row gap-4 items-center">
+              <img class="favicon" src="/assets/icons/favicon.ico" alt="favicon">
+              <span class="karmayogi-text">{{orgData?.channel}}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

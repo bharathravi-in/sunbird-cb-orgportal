@@ -1,0 +1,81 @@
+@import '../../assessment-theme';
+
+.breadcrum {
+  height: 65px;
+  border-bottom: 1px solid $ca-border;
+
+  .back-arrow {
+    color: $ca-text !important;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .assessment-text {
+    font: $ca-font-body;
+    color: $ca-text-muted;
+  }
+
+  .chevron-arrow {
+    color: $ca-text-muted;
+  }
+
+  /* The step the user is on, so it keeps the accent. */
+  .assessment-builder-text {
+    font: $ca-font-title;
+    color: $ca-primary;
+  }
+
+  .save-and-exit {
+    @include ca-button-secondary;
+
+    width: 140px;
+  }
+
+  .next-btn {
+    @include ca-button-primary;
+  }
+
+  .publish-btn {
+    @include ca-button-primary;
+  }
+}
+
+:host ::ng-deep .comprehensive-assessment {
+  .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+    width: calc(100% - 400px);
+    min-width: 800px;
+    align-self: center;
+  }
+
+  .mat-step-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: $ca-on-primary;
+    font: $ca-font-button;
+  }
+
+  /* Where the user is, in the flow's one accent — this was the second colour
+     on the page, an orange that matched nothing else in the journey. */
+  .mat-step-icon-selected,
+  .mat-step-icon-state-done,
+  .mat-step-icon-state-edit {
+    background-color: $ca-primary !important;
+  }
+
+  .mat-step-label-selected {
+    font: $ca-font-title !important;
+    color: $ca-primary !important;
+  }
+
+  /* A step not reached yet is neutral, not a paler tint of the accent. */
+  .mat-step-icon:not(.mat-step-icon-selected):not(.mat-step-icon-state-done):not(.mat-step-icon-state-edit) {
+    background-color: $ca-neutral-strong !important;
+    color: $ca-on-primary !important;
+  }
+
+  .disable-step {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+}

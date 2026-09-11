@@ -405,6 +405,12 @@ export class TrainingPlanDashboardComponent implements OnInit, AfterViewInit {
       this.snackBar.open('Please select an APAR year to continue.')
       return
     }
+    // The year is carried over only when a plan can be set to it. A closed year is filterable
+    // here but not authorable, so the stepper is left to fall back to the current year
+    if (!this.aparYearSvc.isAparYearEditable(this.selectedAparYear)) {
+      this.router.navigate(['app', 'training-plan', 'create-plan'])
+      return
+    }
     this.router.navigate(['app', 'training-plan', 'create-plan'], {
       queryParams: { aparYear: this.selectedAparYear }
     })

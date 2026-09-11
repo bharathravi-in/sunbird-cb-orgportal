@@ -1,0 +1,11 @@
+<div class="assessment-preview">
+  <ng-container *ngIf="content?.identifier; else noPreview">
+    <ws-app-app-toc-home-v2 [inputContent]="content" [forPreview]="true"
+      [displayViewBtn]="false"></ws-app-app-toc-home-v2>
+  </ng-container>
+  <ng-template #noPreview>
+    <div class="no-preview flex justify-center items-center">
+      Complete the previous steps to see the preview.
+    </div>
+  </ng-template>
+</div>

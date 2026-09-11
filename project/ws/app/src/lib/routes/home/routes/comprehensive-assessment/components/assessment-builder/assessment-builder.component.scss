@@ -1,0 +1,10 @@
+@import '../../assessment-theme';
+
+.assessment-builder {
+  @include ca-panel;
+
+  .assessment-header {
+    color: $ca-text;
+    font: $ca-font-section;
+  }
+}

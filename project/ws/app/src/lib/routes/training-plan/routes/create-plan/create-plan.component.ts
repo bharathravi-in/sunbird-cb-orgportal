@@ -48,12 +48,13 @@ export class CreatePlanComponent implements OnInit, OnDestroy {
         this.tpdsSvc.trainingPlanAssigneeData = { category: contentData.assignmentType, data: [contentData.assignmentTypeInfo] }
       }
       if (contentData.contentList && contentData.contentList.length > 0) {
-        // contentList comes back as content ids, the resolver reads the details of those ids.
-        // A content whose details could not be read still keeps its id selected on the plan.
+        // contentList comes back as { identifier, mandatory } entries, the resolver reads the
+        // details of those ids and keeps the mandatory flag on them. A content whose details could
+        // not be read still keeps its id selected on the plan.
         contentData.contentList.forEach((ele: any) => {
           const identifier = (typeof ele === 'string') ? ele : _.get(ele, 'identifier')
           if (identifier) {
-            this.tpdsSvc.trainingPlanStepperData['contentList'].push(identifier)
+            this.tpdsSvc.addContentToPlan(identifier, !!_.get(ele, 'mandatory'))
           }
           if (ele && typeof ele !== 'string') {
             ele.selected = true

@@ -1,0 +1,150 @@
+@import '../../assessment-theme';
+
+.search-box {
+  display: flex;
+  flex: 0 0 auto;
+
+  .search-input {
+    width: 385px;
+    border-radius: $ca-radius-pill;
+    border: 1px solid $ca-border;
+    padding: 9px 9px 9px 45px;
+    margin: 0;
+    font: $ca-font-body;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 22px;
+    color: $ca-text-muted;
+  }
+}
+
+.imageCell {
+  min-width: 260px;
+}
+
+.imageDiv {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 46px;
+}
+
+.cellImage {
+  width: 72px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: $ca-radius-control;
+  border: 1px solid $ca-border;
+}
+
+.table-cell-text {
+  color: $ca-text;
+  font: $ca-font-body;
+}
+
+.text-overflow-elipse {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: fit-content;
+  max-height: 36px;
+}
+
+.table-header-text {
+  color: $ca-text-muted !important;
+  font: $ca-font-meta !important;
+}
+
+.table-date-cell {
+  flex: 0 0 130px;
+}
+
+.table-status-cell {
+  flex: 0 0 110px;
+}
+
+.table-menu-cell {
+  flex: 0 0 100px;
+}
+
+/* Status is the one place colour carries meaning rather than decoration, so
+   these two keep theirs. */
+.status-chip {
+  height: 26px;
+  padding: 0 12px;
+  border-radius: $ca-radius-control;
+  /* stylelint-disable */
+  font: 700 12px Lato;
+  /* stylelint-enable */
+}
+
+.status-live {
+  background-color: $ca-status-live-surface;
+  color: $ca-status-live-text;
+}
+
+.status-draft {
+  background-color: $ca-status-draft-surface;
+  color: $ca-status-draft-text;
+}
+
+.horizontalMenu {
+  color: $ca-text-muted;
+  cursor: pointer;
+}
+
+.item-btn {
+  color: $ca-text-muted !important;
+  font: $ca-font-body;
+  width: auto !important;
+  margin: 0;
+  padding: 0 !important;
+
+  .menu-item-icon {
+    color: $ca-text-muted;
+    margin-right: 5px;
+  }
+}
+
+.no-data {
+  padding: 24px 16px;
+  color: $ca-text-muted;
+}
+
+.tableLoader {
+  height: calc(100vh - 400px);
+}
+
+:host ::ng-deep .assessments-table {
+  .mat-mdc-header-row {
+    background-color: $ca-surface !important;
+    min-height: 40px !important;
+  }
+
+  .mat-mdc-row {
+    min-height: 64px;
+  }
+}
+
+:host ::ng-deep .mat-paginator-container {
+  justify-content: center !important;
+}
+
+:host ::ng-deep mat-cell:first-of-type,
+:host ::ng-deep mat-header-cell:first-of-type {
+  padding-left: 16px !important;
+}
+
+:host ::ng-deep mat-cell:last-of-type,
+:host ::ng-deep mat-header-cell:last-of-type {
+  padding-right: 16px !important;
+}
+
+:host ::ng-deep .mat-mdc-menu-item-text {
+  margin-left: 10px !important;
+}

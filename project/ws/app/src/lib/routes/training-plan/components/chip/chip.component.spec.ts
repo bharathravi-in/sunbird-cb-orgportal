@@ -55,20 +55,19 @@ describe('ChipComponent', () => {
     })
 
     describe('ngOnChanges', () => {
-        it('should reorder selected content chips to the beginning of the array', () => {
-            // Arrange
+        it('should leave the content chips in the order of the plan', () => {
+            // The content chips are given already filtered and ordered by the plan, reordering
+            // them here would drop them out of that order
             component.selectedContentChips = [
-                { id: 1, selected: false },
-                { id: 2, selected: true },
-                { id: 3, selected: false }
+                { identifier: 'do_1', name: 'First' },
+                { identifier: 'do_2', name: 'Second' },
+                { identifier: 'do_3', name: 'Third' }
             ]
 
-            // Act
             component.ngOnChanges()
 
-            // Assert
-            expect(component.selectedContentChips[0].id).toBe(2)
-            expect(component.selectedContentChips.length).toBe(2)
+            expect(component.selectedContentChips.map((item: any) => item.identifier))
+                .toEqual(['do_1', 'do_2', 'do_3'])
         })
 
         it('should reorder selected assignee chips to the beginning of the array', () => {

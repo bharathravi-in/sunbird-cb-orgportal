@@ -1,33 +1,66 @@
-.search_container {
-    margin-top:20px;
+// The dropdown, the search field and the filter button sit on one row, all of them the same
+// height and fully rounded
+$search-control-height: 48px;
+$search-control-radius: 24px;
 
-}
-
 .search_container {
+    margin-top: 20px;
+
     .search {
-        width: 78% !important;
-    height: 48px !important;
+        flex: 1 1 auto;
+        min-width: 0;
+        height: $search-control-height;
     }
 }
 
 .rsearch {
     position: relative;
+    flex: 1 1 auto;
+    // Lets the field shrink beside the search button instead of overflowing the row
+    min-width: 0;
+    height: $search-control-height;
 }
 
 .search-icon {
     position: absolute;
-    top: 16px;
+    left: 16px;
     font-size: 20px;
-    left: 10px;
+    height: 20px;
+    width: 20px;
 }
 
 .sinput {
-    border-radius: 4px;
-    border: 1px solid #d5d0d0;
-    padding: 15px 36px;
+    height: $search-control-height;
+    border-radius: $search-control-radius;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    padding: 0 16px 0 46px;
+    background: #fff;
     /* stylelint-disable */
     font: 400 14px Lato;
     /* stylelint-enable */
+
+    &:focus {
+        outline: none;
+        border-color: rgba(0, 0, 0, 0.38);
+    }
+}
+
+.search-btn {
+    flex: 0 0 auto;
+    background: #1b4ca1 !important;
+    color: white !important;
+    /* stylelint-disable */
+    font-family: 'Lato';
+    /* stylelint-enable */
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: $search-control-radius;
+    min-width: 199px;
+    height: $search-control-height;
+}
+
+.filter-section {
+    flex: 0 0 auto;
 }
 
 .filter-section span {
@@ -36,17 +69,24 @@
     font-weight: 600;
 }
 
-.search-btn {
-    background: #1b4ca1 !important;
-    color: white !important;
+.apply-filter {
+    height: $search-control-height;
+    border-radius: $search-control-radius;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    padding: 0 20px;
+    color: rgba(0, 0, 0, 0.87);
     /* stylelint-disable */
     font-family: 'Lato';
     /* stylelint-enable */
-    font-weight: 700;
+    font-weight: 400;
     font-size: 14px;
-    border-radius: 4px;
-    min-width: 199px;
-    height: 48px;
+    white-space: nowrap;
+
+    mat-icon {
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+    }
 }
 
 .btn-disabled {

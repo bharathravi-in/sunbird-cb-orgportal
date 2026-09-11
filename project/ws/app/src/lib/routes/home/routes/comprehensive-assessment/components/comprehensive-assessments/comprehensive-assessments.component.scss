@@ -1,0 +1,30 @@
+@import '../../assessment-theme';
+
+.createAssessmentBtn {
+  @include ca-button-primary;
+}
+
+.filter {
+  border-bottom: 2px solid $ca-border;
+
+  .filter-option {
+    border-radius: 0;
+    border-bottom-width: 2px;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    color: $ca-text-muted;
+    font: $ca-font-body;
+  }
+
+  /* The tab the user is on, in the flow's one accent. */
+  .ws-mat-accent-border-active {
+    color: $ca-primary !important;
+    font: $ca-font-title;
+  }
+
+  .filter-option:first-child {
+    margin-left: 0;
+    height: auto;
+  }
+}

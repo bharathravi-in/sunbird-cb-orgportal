@@ -1,0 +1,136 @@
+@import '../../assessment-theme';
+
+.plan-picker {
+  width: 100%;
+  background-color: #FFFFFF;
+
+  .picker-title {
+    /* stylelint-disable */
+    font: 600 18px Montserrat;
+    /* stylelint-enable */
+    color: $ca-text;
+  }
+
+  .picker-subtitle {
+    font: $ca-font-meta;
+    color: $ca-text-muted;
+  }
+
+  .close-picker {
+    flex: 0 0 auto;
+    color: $ca-text-muted;
+  }
+}
+
+.picker-filters {
+  .search-field {
+    flex: 1 1 auto;
+  }
+
+  .year-field {
+    flex: 0 0 200px;
+  }
+
+  .filter-icon {
+    color: $ca-text-muted;
+    margin-right: 8px;
+  }
+}
+
+.picker-body {
+  // the list grows every cycle, the dialog scrolls instead of the page behind it
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.picker-state {
+  min-height: 160px;
+  font: $ca-font-meta;
+  color: $ca-text-muted;
+}
+
+.plans-table {
+  border: 1px solid $ca-border;
+  border-radius: $ca-radius-control;
+  overflow: hidden;
+
+  th.mat-header-cell {
+    /* stylelint-disable */
+    font: 700 13px Lato;
+    /* stylelint-enable */
+    color: $ca-text;
+    background-color: $ca-surface;
+  }
+
+  td.mat-cell {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .select-cell {
+    width: 48px;
+  }
+
+  .plan-title-cell {
+    min-width: 0;
+  }
+
+  .cell-value {
+    /* stylelint-disable */
+    font: 600 13px Lato;
+    /* stylelint-enable */
+    color: $ca-text;
+  }
+
+  .cell-title {
+    font: $ca-font-title;
+    color: $ca-text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cell-note {
+    font: $ca-font-meta;
+    color: $ca-text-muted;
+  }
+
+  tr.mat-row {
+    cursor: pointer;
+
+    &:hover {
+      background-color: $ca-surface-hover;
+    }
+  }
+
+  /* The radio already says which row is picked, so the row only has to sit
+     apart from its neighbours — a neutral step, not a second accent. */
+  tr.row-selected {
+    background-color: $ca-surface-selected;
+  }
+
+  // a plan that already carries a Live assessment stays listed, it is only not pickable
+  tr.row-disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.picker-actions {
+  border-top: 1px solid $ca-border;
+
+  /* Both buttons take the flow's one button shape. These two were the pair
+     that disagreed: the outlined one fell back to the Material radius while
+     every other button in the journey was a pill. */
+  .cancel-button {
+    @include ca-button-secondary;
+  }
+
+  .save-button {
+    @include ca-button-primary;
+  }
+}

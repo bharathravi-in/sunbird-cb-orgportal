@@ -1,0 +1,199 @@
+@import 'ws-vars';
+@import '../../assessment-theme';
+
+::ng-deep .create-comprehensive-assessment-dialog {
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 5px 0px 10px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-left-style: solid !important;
+    border-radius: $ca-radius-pill !important;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    display: none;
+  }
+
+  .mat-dialog-container {
+    padding: 0 !important;
+    border-radius: $ca-radius-control !important;
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $ca-surface-selected;
+    border-radius: $ca-radius-control;
+    border: 3px solid transparent;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $ca-neutral-strong;
+  }
+}
+
+.assessment-input-wrapper p {
+  line-height: 24.38px;
+}
+
+.height-480 {
+  height: 480px !important;
+}
+
+.create-cont {
+  height: 451px;
+  width: 1016px !important;
+}
+
+.cancel-button {
+  @include ca-button-secondary;
+
+  width: 74px;
+}
+
+.save-button {
+  @include ca-button-primary;
+
+  min-width: 62px;
+}
+
+.save-assessment {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+}
+
+.upload-assessment-details {
+  height: 100%;
+  background: url('/assets/icons/Card BG png.png') no-repeat center center/cover;
+
+  .upload-card {
+    padding: 0;
+    width: 350px;
+    margin: 47px 41px 48px 41px;
+    border-radius: $ca-radius-card;
+
+    .upload {
+      background-color: $ca-surface;
+      min-height: 201px;
+      height: 201px;
+      overflow: hidden;
+      position: relative;
+      border-top-left-radius: $ca-radius-card;
+      border-top-right-radius: $ca-radius-card;
+
+      span:first-child {
+        color: $ca-primary;
+      }
+
+      span:last-child {
+        line-height: 14.4px;
+        color: $ca-text-muted;
+      }
+
+      // nested inside .upload so it outweighs the span:last-child colour above
+      .change-image-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 6px;
+        background-color: rgba(0, 0, 0, 0.55);
+
+        span {
+          color: #FFFFFF;
+        }
+
+        .change-icon {
+          color: #FFFFFF;
+          font-size: 16px;
+          height: 16px;
+          width: 16px;
+        }
+      }
+    }
+
+    .preview-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .assessment-icon {
+      color: $ca-text-muted;
+      font-size: 18px;
+      height: 18px;
+      width: 18px;
+    }
+
+    .details-assessment {
+      .content-type {
+        border: 1px solid $ca-border;
+        padding: 3.5px 8.5px 3.5px 7.5px;
+        background-color: $ca-surface;
+        border-radius: $ca-radius-pill;
+      }
+    }
+  }
+
+  .custome-title {
+    /* stylelint-disable */
+    font-family: 'Montserrat';
+    /* stylelint-enable */
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.40);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 24.38px;
+    max-height: 2.4em;
+    text-overflow: ellipsis;
+  }
+}
+
+::ng-deep .new-toolTip {
+  background: #000000 !important;
+  font-size: 14px;
+}
+
+.text-blue {
+  color: $ca-primary;
+}
+
+.dashed-border {
+  border: 2px dashed $ca-border;
+}
+
+.favicon {
+  width: 38px;
+  height: 38px;
+  border-radius: $ca-radius-control;
+  border: 1px solid $ca-border;
+}
+
+.karmayogi-text {
+  color: $ca-text;
+  font: $ca-font-body;
+}
+
+/* An aside, so it reads as an inset of the dialog rather than a highlighter pen. */
+.note-container {
+  margin-top: 16px;
+  padding: 9px;
+  background-color: $ca-surface;
+  border-radius: $ca-radius-control;
+}

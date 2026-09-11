@@ -1,0 +1,62 @@
+<div class="w-full flex flex-column comprehensive-assessment">
+  <div class="breadcrum flex items-center justify-between">
+    <div class="flex gap-2 items-center">
+      <mat-icon class="back-arrow" (click)="openConfirmationPopup()">arrow_back</mat-icon>
+      <span class="assessment-text">Comprehensive Assessment</span>
+      <mat-icon class="chevron-arrow">chevron_right</mat-icon>
+      <span class="assessment-builder-text">Assessment Builder</span>
+    </div>
+    <div class="flex gap-4">
+      <ng-container *ngIf="openMode === 'edit'">
+        <button mat-stroked-button class="flex justify-center items-center save-and-exit" (click)="saveAndExit()">
+          Save Draft &amp; Exit</button>
+      </ng-container>
+      <ng-container *ngIf="currentStepperIndex > 0">
+        <button mat-flat-button class="flex justify-center items-center next-btn"
+          (click)="moveToPreviousForm()">Previous</button>
+      </ng-container>
+      <ng-container *ngIf="selectedStepperLable !== 'Preview'">
+        <button mat-flat-button class="flex justify-center items-center next-btn"
+          (click)="moveToNextForm()">Next</button>
+      </ng-container>
+      <ng-container *ngIf="selectedStepperLable === 'Assessment'">
+        <button mat-flat-button class="flex items-center publish-btn" (click)="preview()">Preview</button>
+      </ng-container>
+    </div>
+  </div>
+
+  <mat-stepper labelPosition="bottom" [selectedIndex]="currentStepperIndex"
+    (selectionChange)="onSelectionChange($event)" class="mx-10" #stepper>
+    <!-- Always show numbers -->
+    <ng-template matStepperIcon="number" let-index="index">
+      {{ index + 1 }}
+    </ng-template>
+    <ng-template matStepperIcon="edit" let-index="index">
+      {{ index + 1 }}
+    </ng-template>
+    <ng-template matStepperIcon="done" let-index="index">
+      {{ index + 1 }}
+    </ng-template>
+
+    <mat-step label="Basic Details" [stepControl]="assessmentDetailsForm">
+      <ng-template matStepLabel>Basic Details</ng-template>
+      <ws-app-assessment-basic-details [assessmentDetails]="assessmentDetailsForm" [openMode]="openMode"
+        [userProfile]="userProfile" [duration]="duration"></ws-app-assessment-basic-details>
+    </mat-step>
+
+    <mat-step label="Assessment">
+      <ng-template matStepLabel>Assessment</ng-template>
+      <ng-container *ngIf="selectedStepperLable === 'Assessment'">
+        <ws-app-assessment-builder [assessmentId]="linkedAssessmentId" [openMode]="openMode"
+          (assessmentSaved)="onAssessmentSaved($event)"></ws-app-assessment-builder>
+      </ng-container>
+    </mat-step>
+
+    <mat-step label="Preview">
+      <ng-template matStepLabel>Preview</ng-template>
+      <ng-container *ngIf="selectedStepperLable === 'Preview' && previewReady">
+        <ws-app-assessment-preview [content]="previewContent"></ws-app-assessment-preview>
+      </ng-container>
+    </mat-step>
+  </mat-stepper>
+</div>

@@ -1,0 +1,26 @@
+<div class="flex flex-4 flex-column">
+  <mat-card>
+    <div class="flex justify-between items-center">
+      <span class="mobile-margin mat-h2">Comprehensive Assessment</span>
+      <button mat-flat-button class="createAssessmentBtn" (click)="openBasicInfoDialog()">
+        Create New Assessment
+      </button>
+    </div>
+    <mat-card-content>
+      <div class="flex flex-row mt-4">
+        <div class="flex w-full filter max-height-60 gap-3">
+          <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentRoute === 'live'}" mat-button
+            routerLink="live" role="button">Live
+          </a>
+          <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentRoute === 'draft'}" mat-button
+            routerLink="draft" role="button">Draft
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

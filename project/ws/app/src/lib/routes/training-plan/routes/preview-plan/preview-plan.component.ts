@@ -134,7 +134,7 @@ export class PreviewPlanComponent implements OnInit {
    * what the user ticks, so opening the selected items does not call the search again.
    */
   getSelectedContent() {
-    const contentIds = this.tpdsSvc.trainingPlanStepperData?.contentList || []
+    const contentIds = this.tpdsSvc.getContentIdentifiers()
     const selectedContent = _.keyBy(this.tpdsSvc.trainingPlanSelectedContent || [], 'identifier')
     this.contentList = contentIds
       .map((identifier: string) => selectedContent[identifier])

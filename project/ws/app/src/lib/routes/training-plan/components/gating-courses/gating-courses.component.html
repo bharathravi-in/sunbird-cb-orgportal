@@ -1,0 +1,19 @@
+<div class="gating-courses">
+    <div class="gating-courses-header flex flex-middle justify-between">
+        <span class="header-title">Courses that gate the CA</span>
+        <mat-icon class="info-icon" [matTooltip]="infoText" matTooltipPosition="above">info_outline</mat-icon>
+    </div>
+    <div class="gating-courses-body">
+        <div class="selected-count">{{mandatoryCount}} selected</div>
+        <div class="empty-hint" *ngIf="!selectedCourses?.length">Select courses first.</div>
+        <div class="course-list" *ngIf="selectedCourses?.length">
+            <div class="course-row flex flex-middle"
+                *ngFor="let course of selectedCourses; trackBy: trackByIdentifier">
+                <mat-checkbox class="course-check" [checked]="isMandatory(course)"
+                    (change)="onMandatoryChange($event, course)">
+                    <span class="course-name" [matTooltip]="course?.name">{{course?.name}}</span>
+                </mat-checkbox>
+            </div>
+        </div>
+    </div>
+</div>

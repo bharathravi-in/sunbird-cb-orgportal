@@ -1,0 +1,207 @@
+@import '../../assessment-theme';
+
+.assessment-details {
+  @include ca-panel;
+
+  .assessment-header {
+    color: $ca-text;
+    font: $ca-font-section;
+  }
+}
+
+.linked-plan-row {
+  @include ca-inset-row;
+
+  width: 100%;
+  max-width: 620px;
+  min-height: 64px;
+
+  .plan-icon {
+    flex: 0 0 auto;
+    color: $ca-text-muted;
+  }
+
+  .linked-plan-text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .plan-name {
+    font: $ca-font-title;
+    color: $ca-text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .plan-meta,
+  .plan-placeholder {
+    font: $ca-font-meta;
+    color: $ca-text-muted;
+  }
+
+  .choose-plan {
+    @include ca-button-secondary;
+
+    flex: 0 0 auto;
+  }
+}
+
+.plan-derived {
+  font: $ca-font-meta;
+  color: $ca-text-muted;
+}
+
+.basic-info-row {
+  @include ca-inset-row;
+
+  width: 460px;
+  min-height: 72px;
+
+  .app-icon-thumb {
+    flex: 0 0 auto;
+    height: 48px;
+    width: 48px;
+    overflow: hidden;
+    border: 1px solid $ca-border;
+    border-radius: $ca-radius-control;
+    background-color: #FFFFFF;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .app-icon-placeholder {
+      color: $ca-text-muted;
+      font-size: 24px;
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .basic-info-text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .assessment-name-value {
+    font: $ca-font-title;
+    color: $ca-text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .assessment-name-placeholder {
+    font: $ca-font-meta;
+    color: $ca-text-muted;
+  }
+
+  /* The one accent inside a row: it is the control the user clicks. */
+  .edit-basic-info {
+    flex: 0 0 auto;
+    color: $ca-primary;
+    pointer-events: all;
+  }
+}
+
+.mat-error-text {
+  color: $ca-error;
+}
+
+.form-lable {
+  font: $ca-font-title;
+}
+
+.description-count {
+  margin-top: -30px;
+}
+
+.editor-count {
+  font: $ca-font-meta;
+  color: $ca-text-muted;
+}
+
+.rich-text-field {
+  ::ng-deep .ck-editor__editable {
+    min-height: 150px;
+    border-bottom-left-radius: $ca-radius-control;
+    border-bottom-right-radius: $ca-radius-control;
+  }
+
+  ::ng-deep .ck.ck-toolbar {
+    border-top-left-radius: $ca-radius-control;
+    border-top-right-radius: $ca-radius-control;
+  }
+
+  ::ng-deep .ck.ck-powered-by {
+    display: none !important;
+  }
+
+  .mat-error-text {
+    color: $ca-error;
+  }
+}
+
+/* Reads as a row of the panel like the two above it, not as a pill. */
+.duration-card {
+  @include ca-inset-row;
+
+  height: 48px;
+  width: 460px;
+
+  .duration-icon {
+    color: $ca-text-muted;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .duration-value {
+    font: $ca-font-title;
+    color: $ca-text;
+  }
+
+  .duration-placeholder {
+    font: $ca-font-meta;
+    color: $ca-text-muted;
+  }
+}
+
+:host ::ng-deep .disableForm {
+  .mat-form-field-outline {
+    background-color: $ca-surface;
+  }
+
+  .disable-round {
+    pointer-events: none;
+
+    .mat-form-field-outline {
+      border-radius: $ca-radius-pill;
+    }
+  }
+}
+
+:host ::ng-deep .assessment-form {
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 5px 0px 10px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-left-style: solid !important;
+    border-radius: $ca-radius-pill !important;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    display: none;
+  }
+}
+
+.info-icon {
+  color: $ca-text-muted;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}

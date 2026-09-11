@@ -27,18 +27,18 @@ export class ChipComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.selectedContentChips.forEach((sitem: any, index: any) => {
-      if (sitem && sitem.selected) {
-        this.selectedContentChips.splice(index, 1)
-        this.selectedContentChips.unshift(sitem)
-      }
-    })
+    // The content chips are given already filtered and in the order of the plan. The assignee
+    // chips are still drawn from a page of results, so the picked ones are pulled to the front
     this.selectedAssigneeChips.forEach((sitem: any, index: any) => {
       if (sitem && sitem.selected) {
         this.selectedAssigneeChips.splice(index, 1)
         this.selectedAssigneeChips.unshift(sitem)
       }
     })
+  }
+
+  trackByIdentifier(_index: number, item: any): string {
+    return item?.identifier
   }
 
   clearAll() {
@@ -84,10 +84,7 @@ export class ChipComponent implements OnInit, OnChanges {
         sitem['selected'] = false
       }
     })
-    if (this.tpdsSvc.trainingPlanStepperData.contentList.indexOf(item['identifier']) > -1) {
-      const index = this.tpdsSvc.trainingPlanStepperData.contentList.findIndex((x: any) => x === item['identifier'])
-      this.tpdsSvc.trainingPlanStepperData.contentList.splice(index, 1)
-    }
+    this.tpdsSvc.removeContentFromPlan(item['identifier'])
     this.tpdsSvc.removeSelectedContent(item['identifier'])
     if (this.selectContentCount) {
       this.selectContentCount = this.selectContentCount - 1

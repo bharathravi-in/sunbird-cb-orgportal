@@ -19,6 +19,13 @@ describe('CreateContentComponent', () => {
         tpdsSvcMock = new TrainingPlanDataSharingService() as jest.Mocked<TrainingPlanDataSharingService>
         dialogMock = new MatDialog(null as any, null as any, null as any, null as any, null as any, null as any, null as any, null as any) as jest.Mocked<MatDialog>
         routerMock = new Router() as jest.Mocked<Router>
+        // The component reads the plan content list through the service, the automock is wired to
+        // the contentList each test sets up
+        tpdsSvcMock.getContentList = jest.fn(() =>
+            tpdsSvcMock.trainingPlanStepperData?.contentList || [])
+        tpdsSvcMock.isContentSelected = jest.fn((identifier: string) =>
+            (tpdsSvcMock.trainingPlanStepperData?.contentList || [])
+                .some((item: any) => (typeof item === 'string' ? item : item?.identifier) === identifier))
         component = new CreateContentComponent(tpdsSvcMock, dialogMock, routerMock)
     })
 

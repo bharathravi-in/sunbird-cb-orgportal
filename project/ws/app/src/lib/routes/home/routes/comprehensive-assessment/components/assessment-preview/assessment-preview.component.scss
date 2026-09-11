@@ -1,0 +1,14 @@
+@import '../../assessment-theme';
+
+.assessment-preview {
+  width: 100%;
+
+  /* An empty placeholder, so it stays neutral rather than outlined in the accent. */
+  .no-preview {
+    height: 240px;
+    border: 1px dashed $ca-border;
+    border-radius: $ca-radius-card;
+    color: $ca-text-muted;
+    font: $ca-font-body;
+  }
+}

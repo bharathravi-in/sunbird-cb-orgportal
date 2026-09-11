@@ -1,0 +1,120 @@
+<div class="assessments-table flex flex-column gap-4">
+  <ng-container *ngIf="showSearchBox">
+    <div class="search-box relative">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input class="search-input" type="text" [formControl]="searchControl"
+        placeholder="Type here to search...">
+    </div>
+  </ng-container>
+
+  <div class="table-container">
+    <ng-container *ngIf="!showLoader; else tableLoader">
+      <ng-container *ngIf="dataSource.filteredData.length > 0">
+        <mat-table #table matSort [dataSource]="dataSource" class="responsiveTable">
+
+          <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableColumns">
+            <ng-container [ngSwitch]="col.cellType">
+
+              <ng-container *ngSwitchCase="'textImage'">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header-text imageCell">
+                  {{col.displayName}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="imageCell flex flex-row items-center gap-2">
+                  <ng-container *ngIf="col.imageKey">
+                    <div class="imageDiv">
+                      <img class="cellImage" [src]="element[col.imageKey]" alt="assessment icon">
+                    </div>
+                  </ng-container>
+                  <span [matTooltip]="element[col.key]" [ngClass]="col.cellClass" class="table-cell-text">
+                    {{element[col.key]}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'text'">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header-text">
+                  {{col.displayName}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <span [matTooltip]="element[col.key]" [ngClass]="col.cellClass" class="table-cell-text">
+                    {{element[col.key]}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'date'">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header-text table-date-cell">
+                  {{col.displayName}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="table-date-cell">
+                  <span [ngClass]="col.cellClass" class="table-cell-text">
+                    {{element[col.key] || '-'}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'status'">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header-text table-status-cell">
+                  {{col.displayName}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="table-status-cell">
+                  <span class="status-chip flex items-center justify-center"
+                    [ngClass]="element[col.key] === 'Live' ? 'status-live' : 'status-draft'">
+                    {{element[col.key]}}
+                  </span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'menu'">
+                <mat-header-cell *matHeaderCellDef class="table-header-text table-menu-cell justify-center">
+                  {{col.displayName}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="table-menu-cell justify-center">
+                  <mat-icon i18n-aria-label aria-label="action items" [matMenuTriggerFor]="rowMenu"
+                    class="horizontalMenu">more_horiz</mat-icon>
+                  <mat-menu #rowMenu="matMenu">
+                    <ng-template matMenuContent>
+                      <ng-container *ngFor="let item of getButtonsToShow(element)">
+                        <div mat-menu-item (click)="buttonClick(item.action, element)">
+                          <button class="flex item-btn items-center" mat-icon-button i18n-aria-label
+                            [attr.aria-label]="item.btnText" type="button">
+                            <mat-icon *ngIf="item.icon" class="menu-item-icon">{{item.icon}}</mat-icon>
+                            {{item.btnText}}
+                          </button>
+                        </div>
+                      </ng-container>
+                    </ng-template>
+                  </mat-menu>
+                </mat-cell>
+              </ng-container>
+
+            </ng-container>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="columnsList"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsList"></mat-row>
+        </mat-table>
+      </ng-container>
+
+      <div class="no-data" *ngIf="dataSource.filteredData.length === 0 && searchControl.value">
+        <div class="mat-subheading-1 margin-remove">No results found</div>
+        <div>Try adjusting your search to find what you are looking for.</div>
+      </div>
+      <mat-card class="flex-1" *ngIf="dataSource.filteredData.length === 0 && !searchControl.value">
+        <span class="mat-subtitle">{{noDataMessage}}</span>
+      </mat-card>
+    </ng-container>
+
+    <ng-template #tableLoader>
+      <div class="w-full flex items-center justify-center tableLoader">
+        <mat-spinner [diameter]="50"></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-container *ngIf="showPagination && paginationDetails.totalCount > 0">
+    <mat-paginator [length]="paginationDetails.totalCount" [pageSize]="paginationDetails.pageSize"
+      [pageSizeOptions]="pageSizeOptions" [pageIndex]="paginationDetails.pageIndex" (page)="onChangePage($event)">
+    </mat-paginator>
+  </ng-container>
+</div>
